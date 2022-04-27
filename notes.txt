@@ -11,16 +11,17 @@ same as above => have to update ('test-word.txt') to ('words.txt')
 
 
 3. tell user how many letters word has -> working
-print(len(word)) ?
+print(len(word)) -> thought / see below 
 print("Ok.. let's play!\n" "Your word is", len(current_word), "letters long.")
 
+
 4 Ask user to guess one letter -> working
-input("Shall we play a game?\n")
 guess = input("\nPlease enter 1 letter to guess: ")
 
 
 5. Tell the user if the guess is in the word
 same as 6
+
 
 6. Display partially guessed word like in Wheel of Fortune
 for char in current_word:
@@ -32,15 +33,16 @@ for char in current_word:
                 w += 1
 
 
-
-7. game ends when player guesses word
+7. game ends when player guesses word -> wonky and likely needs to be changed
 if w == 0: # works but want to try something different
             print("\nYou did it!\nThe Mystery Word was " + current_word + " and was solved in " + str(8 - count) + " guesses!")
             exit()
     
 
 
-*MVP's done*
+
+*MVP's done'ish*
+
 
 
 # 2.0
@@ -51,7 +53,8 @@ if w == 0: # works but want to try something different
 current_word = random.choice(word_list)
 
 3. validate guess - make sure is only one letter
-tbd
+if not guess.isalpha(): # looks to be working now
+            print("Invalid entry. Please enter letters only.")
 
 4. limit user to 8 guesses, game ends if user runs out of guesses
 count = 8
@@ -59,7 +62,7 @@ elif count == 0:
             print("No more guesses left. The word was " + current_word)
 
 5. user guesses same letter twice, do not take away a guess
-tbd
+tbd -> logic needs to check if was used already. Currently 
 
 
 6. print message that they can guess again
