@@ -22,7 +22,7 @@ def play_game():
     while count > 0:
         guess = input("\nPlease enter 1 letter to guess: ")
         answer += guess
-        #w = 0
+        w = 0
 
         # Loop: letters vs *'s vs Win
         for char in current_word:
@@ -31,11 +31,12 @@ def play_game():
         
             elif char not in answer:
                 print("*", end = "")
-                #w += 1
-        
-            elif answer in current_word: # not working as I'd like
-                    print("\nYou did it!\nThe Mystery Word was " + current_word + " and was solved in " + str(8 - count) + " guesses!")
-                    exit()
+                w += 1
+
+        if w == 0: # works but want to try something different
+            print("\nYou did it!\nThe Mystery Word was " + current_word + " and was solved in " + str(8 - count) + " guesses!")
+            exit()
+
 
         # Guess tracking
         if guess in current_word:
@@ -45,14 +46,15 @@ def play_game():
         elif guess not in current_word:
             count -= 1
             print("\nSorry no " + guess + "'s try again!\nYou have " + str(count) + " guesses remaining.")
-
-        # elif guess != str?:   -> need to figure out logic 
+        
+        # elif guess < 1 and > 1:   #-> need to figure out logic 
         #     print("Invalid entry. Please try again. \n", guess)
-        
-        
-        elif count == 0:
-            print("\nGame Over!!\nNo more guesses left =(\nThe word was " + current_word + " .")
 
+
+    # Ends game when count is done
+    while count == 0:
+        print("\nGame Over!!\nNo more guesses left =(\nThe word was " + current_word + ".")
+        break
 
 if __name__ == "__main__":
     play_game()
