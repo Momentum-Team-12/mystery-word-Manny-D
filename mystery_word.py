@@ -15,7 +15,7 @@ def play_game():
         print("Ok.. no soup for you!!")
         exit()
 
-# # The Game - Guesses while loop
+# The Game - Guesses while loop
     answer = ' '
     count = 8
 
@@ -25,10 +25,10 @@ def play_game():
 
         for letter in current_word:
             if letter in answer:
-                print(letter, end=" ")
+                print(letter, end = " ")
 
             elif letter not in answer:
-                print("_", end=" ")
+                print("_", end = " ")
         
         if guess in current_word:
             count -= 1
