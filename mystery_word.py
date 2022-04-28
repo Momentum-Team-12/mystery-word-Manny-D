@@ -1,23 +1,24 @@
 import random
 
 def play_game():
-    with open('test-word.txt') as f:
+    with open('words.txt') as f:
         word_string = f.read()
         word_list = word_string.split()
         current_word = random.choice(word_list)
-        # print(current_word)
         
-    # Do you want to build a snowman?!    
-    interested = input("Greetings Professor Falken.\nShall we play a game? y/n \n")
-    if interested.lower() == "y":
-        print("Ok.. let's play!\n" "Your word is", len(current_word), "letters long.")
-    elif interested.lower() == "n":
-        print("A strange game.\nThe only winning move is not to play.\nHow about a nice game of chess?")
-        exit()
-    else:
-        print("Invalid input. Try again.")
-        play_game()
+    # Made function to be reused later
+    def play_again():  
+        interested = input("\nGreetings Professor Falken.\nShall we play a game? (y/n) \n")
+        if interested.lower() == "y":
+            print("Ok.. let's play!\n" "Your word is", len(current_word), "letters long.")
+        elif interested.lower() == "n":
+            print("A strange game.\nThe only winning move is not to play.\nHow about a nice game of chess?")
+            exit()
+        else:
+            print("Invalid input. Try again.")
+            play_game()
 
+    play_again()
 
 # The Game
     answer = []
@@ -41,34 +42,31 @@ def play_game():
         elif guess in current_word:
             print("\nYou got one!\nYou have " + str(count) + " guesses remaining.")
             answer += guess
-        # elif guess not in current_word:
         else:
             count -= 1
             answer += guess
             print("\nSorry no " + guess + "'s try again!\nYou have " + str(count) + " guesses remaining.")
 
-    # Ends game when count is 0 - this logic looks off - but works
+        # Ends game when count is 0 - this logic feels off, but works  ¯\_(ツ)_/¯ 
         if count == 0:
             print("\nGame Over!!\nNo more guesses left =(\nThe Mystery Word was " + current_word + ".")
-            break
+            play_again()
         
-        # Loop: letters (char) vs _'s vs Win
+        # Loop: letters - aka. char and hidden - aka _'s
         for char in current_word:
             if char in answer:
                 print(char, end = "")
-            #elif char not in answer:
             else:
                 print("_", end = "")
                 w += 1
 
         if w == 0: # Working - tries removed though
             print("\nYou did it!\nThe Mystery Word was " + current_word + "!")
-            exit()
+            play_again()
 
         # if w == 0: # working but count is off / want to try something different
         #     print("\nYou did it!\nThe Mystery Word was " + current_word + " and was solved in " + str(tries) + " guesses!")
         #     exit()
-
 
 if __name__ == "__main__":
     play_game()
